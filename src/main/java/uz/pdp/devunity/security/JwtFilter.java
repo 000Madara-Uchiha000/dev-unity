@@ -23,15 +23,18 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorization = request.getHeader("Authorization");
-        if (authorization != null && authorization.startsWith("Bearer ") || !request.getRequestURI().contains("login")) {
+        if (authorization != null && authorization.startsWith("Bearer ")
+    || !request.getRequestURI().contains("auth")
+        ) {
+            System.out.println("keldi");
             String token = authorization.substring(7);
             if (jwtUtil.isValid(token)) {
                 List<SimpleGrantedAuthority> authorities = jwtUtil.getAuthorities(token);
-                String username = jwtUtil.getUsername(token);
+                String username = jwtUtil.getEmail(token);
                 var auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }
-            filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response);
     }
 }

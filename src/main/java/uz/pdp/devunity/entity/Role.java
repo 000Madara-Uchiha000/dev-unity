@@ -4,14 +4,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import uz.pdp.devunity.entity.enums.ROLE_ENUM;
 
-@Getter
-@Setter
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "roles")
 public class Role extends BaseEntity implements GrantedAuthority {
     @Enumerated(EnumType.STRING)

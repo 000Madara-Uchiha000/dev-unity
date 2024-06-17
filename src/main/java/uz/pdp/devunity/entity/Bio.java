@@ -1,9 +1,11 @@
 package uz.pdp.devunity.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -11,6 +13,7 @@ import lombok.Setter;
 public class Bio extends BaseEntity {
     @OneToOne(mappedBy = "bio")
     private User user;
+
     @Column(nullable = false)
     private String firstname;
 
@@ -22,6 +25,7 @@ public class Bio extends BaseEntity {
 
     @OneToOne
     private Photo photo;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Clazz clazz;
 }

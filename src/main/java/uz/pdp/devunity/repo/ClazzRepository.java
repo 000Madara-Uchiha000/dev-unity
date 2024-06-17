@@ -6,4 +6,5 @@ import uz.pdp.devunity.entity.Clazz;
 import java.util.UUID;
 
 public interface ClazzRepository extends JpaRepository<Clazz, UUID> {
+    Clazz findByName(String name);
 }

@@ -14,7 +14,7 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 @Entity
 @Table(name = "participation")
 public class Participation extends BaseEntity {
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Event event;
 
     @ManyToOne

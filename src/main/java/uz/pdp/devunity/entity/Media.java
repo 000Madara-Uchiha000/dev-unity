@@ -1,9 +1,6 @@
 package uz.pdp.devunity.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,9 +9,10 @@ import lombok.Setter;
 @Entity
 @Table(name = "media")
 public class Media extends BaseEntity {
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Event event;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Photo photo;
+
     private String url;
 }

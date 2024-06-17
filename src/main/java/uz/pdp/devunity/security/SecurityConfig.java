@@ -19,14 +19,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
+
 public class SecurityConfig {
     private final CustomUserDetailService customUserDetailService;
     private final  JwtFilter jwtFilter;
 
+    @SuppressWarnings("removal")
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomAuthenticationEntryPoint customAuthenticationEntryPoint) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(m -> m
+                .requestMatchers("/swagger-ui/**",
+                        "/swagger-resources/*",
+                        "/v3/api-docs/**")
+                .permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/admin/**").hasAnyRole("ADMIN","SUPER_ADMIN")
                 .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN","SUPER_ADMIN")
@@ -38,8 +44,12 @@ public class SecurityConfig {
         http.sessionManagement(m->{
             m.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         });
+        http.exceptionHandling()
+                .authenticationEntryPoint(customAuthenticationEntryPoint);
         return http.build();
     }
+
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

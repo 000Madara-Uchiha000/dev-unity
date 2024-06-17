@@ -24,10 +24,10 @@ public class JwtUtil {
         this.customUserDetailService = customUserDetailService;
     }
 
-    public String generateToken(String username) {
-        UserDetails userDetails = customUserDetailService.loadUserByUsername(username);
+    public String generateToken(String email) {
+        UserDetails userDetails = customUserDetailService.loadUserByUsername(email);
         return Jwts.builder()
-                .subject(username)
+                .subject(email)
                 .issuer("dev.uz")
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24*7))
@@ -56,13 +56,12 @@ public class JwtUtil {
         return true;
     }
 
-    public String getUsername(String token) {
+    public String getEmail(String token) {
         Claims claims = getClaims(token);
         return claims.getSubject();
     }
 
 
-    @SuppressWarnings("unchecked")
     public List<SimpleGrantedAuthority> getAuthorities(String token) {
         Claims claims = getClaims(token);
         String str = claims.get("roles", String.class);

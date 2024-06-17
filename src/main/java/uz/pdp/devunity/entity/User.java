@@ -1,8 +1,10 @@
 package uz.pdp.devunity.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,12 +14,19 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users")
 public class User extends BaseEntity implements UserDetails {
-
-    @Column(unique = true, nullable = false)
+    @NotBlank
+    @NotNull
+    @Email
+    @Column(unique = true)
     private String email;
 
+    @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String password;
 
