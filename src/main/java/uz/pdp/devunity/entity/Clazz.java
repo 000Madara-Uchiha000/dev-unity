@@ -6,6 +6,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import uz.pdp.devunity.entity.base.BaseUserEntity;
 
 @Builder
 @AllArgsConstructor
@@ -14,7 +15,7 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "clazz")
-public class Clazz extends BaseEntity {
+public class Clazz extends BaseUserEntity {
     @NotNull
     @NotBlank
     @Column(unique = true)

@@ -2,6 +2,7 @@ package uz.pdp.devunity.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import uz.pdp.devunity.entity.base.BaseEntity;
 
 @Builder
 @AllArgsConstructor

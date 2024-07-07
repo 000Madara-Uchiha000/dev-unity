@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.boot.context.properties.bind.DefaultValue;
+import uz.pdp.devunity.entity.base.BaseEntity;
 
 @AllArgsConstructor
 @NoArgsConstructor

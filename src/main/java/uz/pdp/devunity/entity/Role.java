@@ -6,6 +6,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import uz.pdp.devunity.entity.base.BaseEntity;
 import uz.pdp.devunity.entity.enums.ROLE_ENUM;
 
 

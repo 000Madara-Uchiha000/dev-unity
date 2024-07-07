@@ -67,6 +67,12 @@ public class Runner implements CommandLineRunner {
                     .name("8-02")
                     .build();
             clazzRepository.save(clazz);
+
+
+            Clazz clazz1=Clazz.builder()
+                    .name("10-02")
+                    .build();
+            clazzRepository.save(clazz1);
         }
 
     }

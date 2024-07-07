@@ -6,7 +6,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CurrentTimestamp;
+import uz.pdp.devunity.entity.base.BaseUserEntity;
 
 import java.time.LocalDateTime;
 
@@ -14,14 +14,14 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "events")
-public class Event extends BaseEntity {
+public class Event extends BaseUserEntity {
     private String title;
     private String body;
     private Integer participationLimit;
     @OneToOne(fetch = FetchType.LAZY)
     private Photo photo;
 
-    @CurrentTimestamp
     private LocalDateTime startTime;
+    private Integer probableHours;
     private String place;
 }

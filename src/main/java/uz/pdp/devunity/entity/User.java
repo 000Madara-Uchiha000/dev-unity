@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import uz.pdp.devunity.entity.base.BaseEntity;
 
 import java.util.Collection;
 import java.util.List;
@@ -46,4 +47,8 @@ public class User extends BaseEntity implements UserDetails {
     public String getUsername() {
         return this.email;
     }
+
+
+
+
 }
