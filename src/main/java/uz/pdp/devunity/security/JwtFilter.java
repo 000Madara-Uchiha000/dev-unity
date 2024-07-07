@@ -27,16 +27,20 @@ public class JwtFilter extends OncePerRequestFilter {
         if (authorization != null && authorization.startsWith("Bearer ")
                 || !(request.getRequestURI().contains("auth") || request.getRequestURI().contains("/swagger") || request.getRequestURI().contains("/v3")
         )) {
-
+            System.out.println(authorization);
             String token = authorization.substring(7);
             if (jwtUtil.isValid(token)) {
                 List<SimpleGrantedAuthority> authorities = jwtUtil.getAuthorities(token);
                 String email = jwtUtil.getEmail(token);
+                System.out.println(email);
                 var auth = new UsernamePasswordAuthenticationToken(email, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(auth);
-                filterChain.doFilter(request, response);
             }
+            filterChain.doFilter(request, response);
+            return;
         }
         filterChain.doFilter(request, response);
+
+
     }
 }

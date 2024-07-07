@@ -46,7 +46,7 @@ public class JwtUtil {
         StringBuilder value = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < 64; i++) {
-            value.append(random.nextInt(10));
+            value.append(1);
         }
         return value;
     }
