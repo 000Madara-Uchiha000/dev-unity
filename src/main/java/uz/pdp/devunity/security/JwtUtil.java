@@ -44,15 +44,12 @@ public class JwtUtil {
 
     private static StringBuilder getStringValueForSecretKey() {
         StringBuilder value = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < 64; i++) {
-            value.append(1);
-        }
+        value.append("1".repeat(64));
         return value;
     }
 
     public boolean isValid(String token) {
-        Claims claims = getClaims(token);
+        getClaims(token);
         return true;
     }
 
@@ -66,7 +63,7 @@ public class JwtUtil {
         Claims claims = getClaims(token);
         String str = claims.get("roles", String.class);
         String[] arr= str.split(",");
-        return Arrays.stream(arr).map(item -> new SimpleGrantedAuthority(item)).toList();
+        return Arrays.stream(arr).map(SimpleGrantedAuthority::new).toList();
     }
 
     private Claims getClaims(String token) {

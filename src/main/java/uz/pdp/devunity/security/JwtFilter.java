@@ -20,6 +20,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
 
+    @SuppressWarnings("NullableProblems")
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorization = request.getHeader("Authorization");
@@ -28,6 +29,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 || !(request.getRequestURI().contains("auth") || request.getRequestURI().contains("/swagger") || request.getRequestURI().contains("/v3")
         )) {
             System.out.println(authorization);
+            assert authorization != null;
             String token = authorization.substring(7);
             if (jwtUtil.isValid(token)) {
                 List<SimpleGrantedAuthority> authorities = jwtUtil.getAuthorities(token);
