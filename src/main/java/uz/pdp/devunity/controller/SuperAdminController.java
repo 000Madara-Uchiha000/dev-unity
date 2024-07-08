@@ -39,14 +39,20 @@ public class SuperAdminController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         User user = userRepository.findByEmail(email);
-        var superUserProfileResponse = new SuperUserProfileResponse(
-                user.getBio().getFirstname(),
-                user.getBio().getLastname(),
-                user.getBio().getPhoto().getPhoto());
+        if (user.getBio()!=null) {
+            var superUserProfileResponse = new SuperUserProfileResponse(
+                    user.getBio().getFirstname(),
+                    user.getBio().getLastname(),
+                    user.getBio().getPhoto().getPhoto());
+            return ResponseEntity.ok(
+                    Response.builder().message("Super User Profile").data(superUserProfileResponse).build()
+            );
 
-        return ResponseEntity.ok(
-                Response.builder().message("Super User Profile").data(superUserProfileResponse).build()
-        );
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+
+
     }
 
     @Tag(name = "the statistics of classes in terms of user registration")

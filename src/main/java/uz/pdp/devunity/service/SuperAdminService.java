@@ -1,8 +1,8 @@
 package uz.pdp.devunity.service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import uz.pdp.devunity.dto.AdminDto;
 import uz.pdp.devunity.dto.AdminResponseProjectionDto;
 import uz.pdp.devunity.entity.Admin;
@@ -79,11 +79,16 @@ public class SuperAdminService {
     }
 
     public List<AdminResponseProjectionDto> getAllAdmins() {
+        List<AdminResponseProjectionDto> list=null;
+        try {
+            list = userRepository.findAllAdminsData();
 
-        List<AdminResponseProjectionDto> list = userRepository.findAllAdminsData();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         for (AdminResponseProjectionDto item : list) {
             List<AdminDto> adminRoleList = item.getAdminDtos();
-            List<AdminDto> dbData=adminRepository.findAllByUserId(item.getUserId());
+            List<AdminDto> dbData = adminRepository.findAllByUserId(item.getUserId());
             adminRoleList.addAll(dbData);
         }
         return list;
@@ -95,7 +100,7 @@ public class SuperAdminService {
             throw new RuntimeException("User not found");
         }
         User user = opt.get();
-        addToAdmin(user,adminRole,roleDescription);
+        addToAdmin(user, adminRole, roleDescription);
     }
 
     public void deleteAdminRole(UUID adminId) {

@@ -15,7 +15,9 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query(nativeQuery = true,value = "select count(distinct u.email) from users u join admins a on u.id=a.user_id ;")
     Integer countDevUnityMembers();
 
-    @Query(nativeQuery = true,value = "select distinct u.id as userId, u.email as email,b.firstname as firstName,b.lastname as lastName from users u\n" +
+    @Query(nativeQuery = true,value = "select distinct" +
+            " u.id as userId," +
+            " u.email as email,b.firstname as firstName,b.lastname as lastName from users u" +
             "            join bio b on u.bio_id = b.id\n" +
             "            join users_roles us on us.user_id=u.id\n" +
             "            where us.roles_id=(select id from roles where role_enum='ROLE_ADMIN')")
