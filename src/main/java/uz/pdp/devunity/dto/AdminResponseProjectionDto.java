@@ -21,10 +21,10 @@ public class AdminResponseProjectionDto implements AdminResponseDtoProjection {
     private String lastName;
     private List<AdminDto> adminDtos=new ArrayList<>();
 
-    public AdminResponseProjectionDto(String lastName, String firstName, String email, UUID userId) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.email = email;
+    public AdminResponseProjectionDto(UUID userId, String email, String firstName, String lastName) {
         this.userId = userId;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 }

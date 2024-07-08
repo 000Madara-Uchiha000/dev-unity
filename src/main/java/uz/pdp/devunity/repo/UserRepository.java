@@ -1,5 +1,7 @@
 package uz.pdp.devunity.repo;
 
+import jakarta.persistence.SqlResultSetMapping;
+import jakarta.persistence.Tuple;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import uz.pdp.devunity.dto.AdminResponseProjectionDto;
@@ -21,5 +23,8 @@ public interface UserRepository extends JpaRepository<User, UUID> {
             "            join bio b on u.bio_id = b.id\n" +
             "            join users_roles us on us.user_id=u.id\n" +
             "            where us.roles_id=(select id from roles where role_enum='ROLE_ADMIN')")
-    List<AdminResponseProjectionDto> findAllAdminsData();
+    List<Object[]> findAllAdminsData();
+
+
+
 }

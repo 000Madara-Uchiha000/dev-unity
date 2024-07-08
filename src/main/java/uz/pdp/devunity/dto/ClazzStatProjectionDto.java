@@ -8,7 +8,7 @@ import uz.pdp.devunity.projection.ClazzStatProjection;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClazzStatProjectionDto implements ClazzStatProjection {
+public class ClazzStatProjectionDto  {
     private String clazzName;
-    private Integer studentCount;
+    private Long studentCount;
 }

@@ -14,10 +14,7 @@ import uz.pdp.devunity.repo.AdminRepository;
 import uz.pdp.devunity.repo.RoleRepository;
 import uz.pdp.devunity.repo.UserRepository;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -77,16 +74,16 @@ public class SuperAdminService {
         user.getRoles().removeIf(role -> role.getRoleEnum().equals(ROLE_ENUM.ROLE_ADMIN));
         userRepository.save(user);
     }
-
+    @Transactional
     public List<AdminResponseProjectionDto> getAllAdmins() {
-        List<AdminResponseProjectionDto> list=null;
-        try {
-            list = userRepository.findAllAdminsData();
-
-        }catch (Exception e) {
-            e.printStackTrace();
+        var da = userRepository.findAllAdminsData();
+        var list = new ArrayList<AdminResponseProjectionDto>();
+        for (Object[] objects : da) {
+            var dto = new AdminResponseProjectionDto((UUID) objects[0], (String) objects[1], (String) objects[2], (String) objects[3]);
+            list.add(dto);
         }
-        for (AdminResponseProjectionDto item : list) {
+        System.out.println("OK");
+        for (var item : list) {
             List<AdminDto> adminRoleList = item.getAdminDtos();
             List<AdminDto> dbData = adminRepository.findAllByUserId(item.getUserId());
             adminRoleList.addAll(dbData);

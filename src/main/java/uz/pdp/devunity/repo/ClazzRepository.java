@@ -14,6 +14,7 @@ public interface ClazzRepository extends JpaRepository<Clazz, UUID> {
     List<String> findAllNames();
 
 
-    @Query(nativeQuery = true,value = "select c.name as clazzName,COUNT(b.*) as studentCount from clazz c left join bio b on b.clazz_id=c.id group by c.id order by c.name")
+//    @Query(nativeQuery = true,value = "select c.name as clazzName,COUNT(b.*) as studentCount from clazz c left join bio b on b.clazz_id=c.id group by c.id order by c.name")
+    @Query(value = "select new uz.pdp.devunity.dto.ClazzStatProjectionDto(c.name,count(b)) from  Clazz c left join Bio b on b.clazz.id=c.id group by c.id order by c.name")
     List<ClazzStatProjectionDto> generateStatisticByClazz();
 }
