@@ -24,7 +24,7 @@ public class Bio extends BaseEntity {
 
     private String bio;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Photo photo;
 
     @ManyToOne(fetch = FetchType.LAZY)
