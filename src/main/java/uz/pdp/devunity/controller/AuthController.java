@@ -14,11 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.devunity.dto.LoginDto;
 import uz.pdp.devunity.dto.RegisterDto;
-import uz.pdp.devunity.entity.Bio;
-import uz.pdp.devunity.entity.Clazz;
-import uz.pdp.devunity.entity.Role;
 import uz.pdp.devunity.entity.User;
-import uz.pdp.devunity.entity.enums.ROLE_ENUM;
 import uz.pdp.devunity.repo.BioRepository;
 import uz.pdp.devunity.repo.ClazzRepository;
 import uz.pdp.devunity.repo.RoleRepository;
@@ -26,8 +22,6 @@ import uz.pdp.devunity.repo.UserRepository;
 import uz.pdp.devunity.response.Response;
 import uz.pdp.devunity.security.JwtUtil;
 import uz.pdp.devunity.service.AuthService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -37,9 +31,6 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final ClazzRepository clazzRepository;
     private final UserRepository userRepository;
-    private final BioRepository bioRepository;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
     private final AuthService authService;
 
     @Tag(name = "login user")

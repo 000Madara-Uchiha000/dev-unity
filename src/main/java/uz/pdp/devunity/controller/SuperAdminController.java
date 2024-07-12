@@ -143,7 +143,7 @@ public class SuperAdminController {
     }
 
     @Tag(name = "Delete admin role", description = "adminId")
-    @GetMapping("/admins/role/delete")
+    @DeleteMapping("/admins/role/delete")
     public ResponseEntity<?> deleteAdminRole(
             @RequestParam UUID adminId
     ) {
@@ -153,7 +153,7 @@ public class SuperAdminController {
 
 
     @Tag(name = "Extracting from admin role wholly", description = "send user Id not adminId")
-    @GetMapping("/admins/delete")
+    @DeleteMapping("/admins/delete")
     public ResponseEntity<?> deleteAdmin(@RequestParam UUID userId) {
         superAdminService.extractFromAdmin(userId);
 
