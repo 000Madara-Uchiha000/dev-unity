@@ -21,7 +21,7 @@ public class Bio extends BaseEntity {
     @Column(nullable = false)
     private String lastname;
 
-
+    @Column(length = 100000)
     private String bio;
 
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)

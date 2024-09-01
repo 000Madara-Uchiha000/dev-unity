@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public interface AdminResponseDtoProjection {
     UUID getUserId();
-    String getEmail();
+    String getUsername();
     String getFirstName();
     String getLastName();
 }

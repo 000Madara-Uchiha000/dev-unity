@@ -1,7 +1,7 @@
-package uz.pdp.devunity.mappers;
+package uz.pdp.devunity.mappers.admin;
 
 import org.mapstruct.*;
-import uz.pdp.devunity.dto.AdminUserBioDto;
+import uz.pdp.devunity.dto.admin.AdminUserBioDto;
 import uz.pdp.devunity.entity.Bio;
 import uz.pdp.devunity.entity.User;
 

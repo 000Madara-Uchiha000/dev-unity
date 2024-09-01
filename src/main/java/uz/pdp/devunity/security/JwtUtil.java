@@ -23,10 +23,10 @@ public class JwtUtil {
         this.customUserDetailService = customUserDetailService;
     }
 
-    public String generateToken(String email) {
-        UserDetails userDetails = customUserDetailService.loadUserByUsername(email);
+    public String generateToken(String username) {
+        UserDetails userDetails = customUserDetailService.loadUserByUsername(username);
         return Jwts.builder()
-                .subject(email)
+                .subject(username)
                 .issuer("dev.uz")
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24*7))
@@ -52,7 +52,7 @@ public class JwtUtil {
         return true;
     }
 
-    public String getEmail(String token) {
+    public String getUsername(String token) {
         Claims claims = getClaims(token);
         return claims.getSubject();
     }

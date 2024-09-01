@@ -23,7 +23,7 @@ public class AuditorAwareImpl implements AuditorAware<User> {
         if (authentication == null || !authentication.isAuthenticated()) {
             return Optional.empty();
         }
-        String email = authentication.getName();
-        return Optional.ofNullable(userRepository.findByEmail(email));
+        String username = authentication.getName();
+        return Optional.ofNullable(userRepository.findByUsername(username));
     }
 }

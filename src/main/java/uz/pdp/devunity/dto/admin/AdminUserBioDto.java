@@ -1,4 +1,4 @@
-package uz.pdp.devunity.dto;
+package uz.pdp.devunity.dto.admin;
 
 import lombok.Value;
 import uz.pdp.devunity.entity.Clazz;

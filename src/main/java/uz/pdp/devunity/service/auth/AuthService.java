@@ -1,10 +1,10 @@
-package uz.pdp.devunity.service;
+package uz.pdp.devunity.service.auth;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import uz.pdp.devunity.dto.RegisterDto;
+import uz.pdp.devunity.dto.auth.RegisterDto;
 import uz.pdp.devunity.entity.Bio;
 import uz.pdp.devunity.entity.Clazz;
 import uz.pdp.devunity.entity.Role;
@@ -31,7 +31,7 @@ public class AuthService {
                 .roles(List.of(
                         role
                 ))
-                .email(registerDto.getEmail())
+                .username(registerDto.getUsername())
                 .password(
                         passwordEncoder.encode(
                                 registerDto.getPassword())

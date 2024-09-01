@@ -1,9 +1,8 @@
-package uz.pdp.devunity.dto;
+package uz.pdp.devunity.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uz.pdp.devunity.entity.Photo;
 
 import java.util.UUID;
 
@@ -12,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class EditUserDto {
     private UUID id;
-    private String email;
+    private String username;
     private String password;
     private String firstName;
     private String lastName;

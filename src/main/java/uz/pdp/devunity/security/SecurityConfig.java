@@ -7,6 +7,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -19,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
-
+@EnableMethodSecurity()
 public class SecurityConfig {
     private final CustomUserDetailService customUserDetailService;
     private final  JwtFilter jwtFilter;
@@ -31,12 +33,15 @@ public class SecurityConfig {
         http.authorizeHttpRequests(m -> m
                 .requestMatchers("/swagger-ui/**",
                         "/swagger-resources/*",
-                        "/v3/api-docs/**")
-                .permitAll()
+                        "/v3/api-docs/**").permitAll()
+                .requestMatchers("/api/event/user/**").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/admin/**").hasAnyRole("ADMIN","SUPER_ADMIN")
                 .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN","SUPER_ADMIN")
                 .requestMatchers("/api/super/admin/**").hasRole("SUPER_ADMIN")
+                .requestMatchers("/api/check/role/admin").hasAnyRole("ADMIN","SUPER_ADMIN")
+                .requestMatchers("/api/check/role/user").hasAnyRole("USER","ADMIN","SUPER_ADMIN")
+                .requestMatchers("/api/check/role/super").hasRole("SUPER_ADMIN")
                 .anyRequest()
                 .authenticated()
         );

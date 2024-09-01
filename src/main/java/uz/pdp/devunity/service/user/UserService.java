@@ -1,8 +1,11 @@
-package uz.pdp.devunity.service;
+package uz.pdp.devunity.service.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import uz.pdp.devunity.dto.EditUserDto;
+import uz.pdp.devunity.dto.user.EditUserDto;
 import uz.pdp.devunity.entity.Photo;
 import uz.pdp.devunity.entity.User;
 import uz.pdp.devunity.repo.PhotoRepository;
@@ -28,7 +31,7 @@ public class UserService {
     }
     public void setEditUserDto(EditUserDto editUserDto, User user){
 
-        user.setEmail(editUserDto.getEmail());
+        user.setUsername(editUserDto.getUsername());
         user.setPassword(editUserDto.getPassword());
         if (user.getBio().getPhoto()!=null) {
             photoRepository.delete(user.getBio().getPhoto());
@@ -41,5 +44,16 @@ public class UserService {
         user.getBio().setLastname(editUserDto.getLastName());
         user.getBio().setBio(editUserDto.getBio());
         userRepository.save(user);
+    }
+
+
+    public UserDetails getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            return (UserDetails) authentication.getPrincipal();
+        }
+
+        return null;
     }
 }

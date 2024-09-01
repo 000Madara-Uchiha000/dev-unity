@@ -1,9 +1,8 @@
-package uz.pdp.devunity.dto;
+package uz.pdp.devunity.dto.clazz;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uz.pdp.devunity.projection.ClazzStatProjection;
 
 @Data
 @AllArgsConstructor

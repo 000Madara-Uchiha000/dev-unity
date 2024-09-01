@@ -36,7 +36,7 @@ public class BaseUserEntity {
     @ManyToOne
     @CreatedBy
     @JoinColumn(name = "created_by_user_id")
-    private User user;
+    private User createdBy;
 
     @LastModifiedBy
     @ManyToOne

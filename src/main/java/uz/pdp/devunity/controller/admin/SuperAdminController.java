@@ -1,4 +1,4 @@
-package uz.pdp.devunity.controller;
+package uz.pdp.devunity.controller.admin;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.devunity.dto.AdminResponseProjectionDto;
-import uz.pdp.devunity.dto.ClazzStatProjectionDto;
+import uz.pdp.devunity.dto.admin.AdminResponseProjectionDto;
+import uz.pdp.devunity.dto.clazz.ClazzStatProjectionDto;
 import uz.pdp.devunity.entity.User;
 import uz.pdp.devunity.entity.enums.ADMIN_ROLE;
 import uz.pdp.devunity.projection.EventDtoProjection;
@@ -15,7 +15,7 @@ import uz.pdp.devunity.repo.*;
 import uz.pdp.devunity.response.Response;
 import uz.pdp.devunity.response.SuperUserClazzStatResponse;
 import uz.pdp.devunity.response.SuperUserProfileResponse;
-import uz.pdp.devunity.service.SuperAdminService;
+import uz.pdp.devunity.service.super_admin.SuperAdminService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +24,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/super/admin")
 @RequiredArgsConstructor
+@Tag(name = "Super Admin Controller")
 public class SuperAdminController {
 
     private final UserRepository userRepository;
@@ -33,12 +34,12 @@ public class SuperAdminController {
     private final SuperAdminService superAdminService;
     private final AdminRepository adminRepository;
 
-    @Tag(name = "super user profile getting name and photo")
+//    @Tag(name = "super user profile getting name and photo")
     @GetMapping("/profile")
     public ResponseEntity<?> getUserBio() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        User user = userRepository.findByEmail(email);
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username);
         if (user.getBio()!=null) {
             var superUserProfileResponse = new SuperUserProfileResponse(
                     user.getBio().getFirstname(),
@@ -55,7 +56,7 @@ public class SuperAdminController {
 
     }
 
-    @Tag(name = "the statistics of classes in terms of user registration")
+//    @Tag(name = "the statistics of classes in terms of user registration")
     @GetMapping("/statistics/clazz/list")
     public ResponseEntity<?> getClazzStat() {
         List<ClazzStatProjectionDto> clazzStatDtos = clazzRepository.generateStatisticByClazz();
@@ -65,7 +66,7 @@ public class SuperAdminController {
         );
     }
 
-    @Tag(name = "The statistics of event.", description = "Result gives event count")
+//    @Tag(name = "The statistics of event.", description = "Result gives event count")
     @GetMapping("/statistics/event/count")
     public ResponseEntity<?> getEventCount() {
         Integer count = eventRepository.countEvents();
@@ -74,7 +75,7 @@ public class SuperAdminController {
         );
     }
 
-    @Tag(name = "The statistics of event in terms of participant count")
+//    @Tag(name = "The statistics of event in terms of participant count")
     @GetMapping("/statistics/event/participant/count")
     public ResponseEntity<?> getParticipantCount() {
         Integer count = participationRepository.countAttendedParticipation();
@@ -83,7 +84,7 @@ public class SuperAdminController {
         );
     }
 
-    @Tag(name = "The statistics of devUnity member(count)")
+//    @Tag(name = "The statistics of devUnity member(count)")
     @GetMapping("/statistics/dev/member/count")
     public ResponseEntity<?> getDevUnityMemberCount() {
         Integer count = userRepository.countDevUnityMembers();
@@ -92,7 +93,7 @@ public class SuperAdminController {
         );
     }
 
-    @Tag(name = "The count of registered User")
+//    @Tag(name = "The count of registered User")
     @GetMapping("/statistics/user/count")
     public ResponseEntity<?> getCountOfAllRegisteredUsers() {
         long count = userRepository.count();
@@ -101,7 +102,7 @@ public class SuperAdminController {
         );
     }
 
-    @Tag(name = "The statistics of event", description = "result give event count in each month")
+//    @Tag(name = "The statistics of event", description = "result give event count in each month")
     @GetMapping("/statistics/event/organize")
     public ResponseEntity<?> getCountOrganizedEvents() {
         EventDtoProjection eventDtoProjection = eventRepository.countEventsGroupByMonthOrderByTimeDesc();
@@ -119,19 +120,19 @@ public class SuperAdminController {
     }
 
 
-    @Tag(name = "Adding new admin")
+//    @Tag(name = "Adding new admin")
     @PostMapping("/admins/add")
     public ResponseEntity<?> addAdmin(
-            @RequestParam String email,
+            @RequestParam String username,
             @RequestParam ADMIN_ROLE adminRole,
             @RequestParam String role_description
     ) {
-        superAdminService.addAdmin(email, adminRole, role_description);
+        superAdminService.addAdmin(username, adminRole, role_description);
         return ResponseEntity.ok("Admin successfully added ");
     }
 
 
-    @Tag(name = "Adding new admin role", description = "send userId")
+//    @Tag(name = "Adding new admin role", description = "send userId")
     @PostMapping("/admins/role/add")
     public ResponseEntity<?> addAdminRole(
             @RequestParam UUID userId,
@@ -142,7 +143,7 @@ public class SuperAdminController {
         return ResponseEntity.ok("Admin Role successfully added");
     }
 
-    @Tag(name = "Delete admin role", description = "adminId")
+//    @Tag(name = "Delete admin role", description = "adminId")
     @DeleteMapping("/admins/role/delete")
     public ResponseEntity<?> deleteAdminRole(
             @RequestParam UUID adminId
@@ -152,7 +153,7 @@ public class SuperAdminController {
     }
 
 
-    @Tag(name = "Extracting from admin role wholly", description = "send user Id not adminId")
+//    @Tag(name = "Extracting from admin role wholly", description = "send user Id not adminId")
     @DeleteMapping("/admins/delete")
     public ResponseEntity<?> deleteAdmin(@RequestParam UUID userId) {
         superAdminService.extractFromAdmin(userId);
@@ -160,7 +161,7 @@ public class SuperAdminController {
         return ResponseEntity.ok("Admin successfully deleted");
     }
 
-    @Tag(name = "Get all admins")
+//    @Tag(name = "Get all admins")
     @GetMapping("/admins")
     public ResponseEntity<?> getAllAdmins() {
         List<AdminResponseProjectionDto> list = superAdminService.getAllAdmins();
@@ -169,7 +170,7 @@ public class SuperAdminController {
         );
     }
 
-    @Tag(name = "Get All Admin Roles", description = "such as Leader,Developer")
+//    @Tag(name = "Get All Admin Roles", description = "such as Leader,Developer")
     @GetMapping("/admins/roles")
     public ResponseEntity<?> getAllAdminRoles() {
         List<ADMIN_ROLE> roles = superAdminService.getAllAdminRoles();

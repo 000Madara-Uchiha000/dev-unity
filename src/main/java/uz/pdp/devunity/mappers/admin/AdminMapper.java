@@ -1,7 +1,7 @@
-package uz.pdp.devunity.mappers;
+package uz.pdp.devunity.mappers.admin;
 
 import org.mapstruct.*;
-import uz.pdp.devunity.dto.AdminDto;
+import uz.pdp.devunity.dto.admin.AdminDto;
 import uz.pdp.devunity.entity.Admin;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)

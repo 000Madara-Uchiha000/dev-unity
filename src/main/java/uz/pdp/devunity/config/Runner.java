@@ -67,17 +67,17 @@ public class Runner implements CommandLineRunner {
             InputStream resourceAsStream = Files.newInputStream(resourcePath);
             byte[] bytes = resourceAsStream.readAllBytes();
             User user = User.builder()
-                    .email("user@gmail.com")
+                    .username("user")
                     .password(passwordEncoder.encode("123"))
                     .roles(List.of(roleUser))
                     .build();
             User user1 = User.builder()
-                    .email("admin@gmail.com")
+                    .username("admin")
                     .password(passwordEncoder.encode("123"))
                     .roles(List.of(roleUser,roleAdmin))
                     .build();
             User user2 = User.builder()
-                    .email("super@gmail.com")
+                    .username("super")
                     .password(passwordEncoder.encode("123"))
                     .roles(List.of(roleUser,roleAdmin,roleSuperAdmin))
                     .bio(Bio.builder()
@@ -92,7 +92,7 @@ public class Runner implements CommandLineRunner {
                     .build();
 
             User user3 = User.builder()
-                    .email("super1@gmail.com")
+                    .username("super1")
                     .password(passwordEncoder.encode("123"))
                     .roles(List.of(roleUser,roleAdmin,roleSuperAdmin))
                     .bio(Bio.builder()

@@ -1,10 +1,10 @@
-package uz.pdp.devunity.service;
+package uz.pdp.devunity.service.super_admin;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import uz.pdp.devunity.dto.AdminDto;
-import uz.pdp.devunity.dto.AdminResponseProjectionDto;
+import uz.pdp.devunity.dto.admin.AdminDto;
+import uz.pdp.devunity.dto.admin.AdminResponseProjectionDto;
 import uz.pdp.devunity.entity.Admin;
 import uz.pdp.devunity.entity.Role;
 import uz.pdp.devunity.entity.User;
@@ -24,8 +24,8 @@ public class SuperAdminService {
     private final AdminRepository adminRepository;
     private final RoleRepository roleRepository;
 
-    public void addAdmin(String email, ADMIN_ROLE adminRole, String roleDescription) {
-        Optional<User> opt = Optional.ofNullable(userRepository.findByEmail(email));
+    public void addAdmin(String username, ADMIN_ROLE adminRole, String roleDescription) {
+        Optional<User> opt = Optional.ofNullable(userRepository.findByUsername(username));
         if (opt.isEmpty()) {
             throw new RuntimeException("User not found");
         }

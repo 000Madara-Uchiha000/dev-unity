@@ -1,9 +1,8 @@
-package uz.pdp.devunity.dto;
+package uz.pdp.devunity.dto.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 import uz.pdp.devunity.entity.enums.ADMIN_ROLE;
 import uz.pdp.devunity.projection.AdminDtoProjection;
 

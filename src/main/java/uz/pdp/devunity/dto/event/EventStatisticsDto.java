@@ -1,4 +1,4 @@
-package uz.pdp.devunity.dto;
+package uz.pdp.devunity.dto.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import uz.pdp.devunity.projection.EventDtoProjection;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EventDto implements EventDtoProjection {
+public class EventStatisticsDto implements EventDtoProjection {
     private Integer count;
     private Integer month;
 }

@@ -17,5 +17,6 @@ public class Message extends BaseEntity {
 
     @NotNull
     @NotBlank
+    @Column(length = 100000)
     private String message;
 }

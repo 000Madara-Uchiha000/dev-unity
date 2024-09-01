@@ -1,4 +1,4 @@
-package uz.pdp.devunity.dto;
+package uz.pdp.devunity.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class LoginDto {
-    private String email;
+    private String username;
     private String password;
 }

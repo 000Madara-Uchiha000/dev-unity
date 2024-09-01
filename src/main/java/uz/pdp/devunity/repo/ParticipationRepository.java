@@ -9,4 +9,7 @@ import java.util.UUID;
 public interface ParticipationRepository extends JpaRepository<Participation, UUID> {
     @Query(nativeQuery = true,value = "select count(*) from participation where is_attended=true")
     Integer countAttendedParticipation();
+
+    @Query(nativeQuery = true,value="select count(*) from participation where event_id=?")
+    Integer countBookedSeatsByEventId(UUID id);
 }
