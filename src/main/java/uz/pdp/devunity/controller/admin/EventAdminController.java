@@ -22,7 +22,7 @@ public class EventAdminController {
     private final EventAdminService eventAdminService;
 
     @Transactional
-//    @Tag(name = "create event")
+//    @Tag(name = "create event",description = "create event")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> createEvent(@ModelAttribute EventCreationDto eventDto) {
         EventCreationResponse eventResponse = eventAdminService.createEvent(eventDto);
