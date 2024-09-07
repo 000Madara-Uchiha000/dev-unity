@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ import uz.pdp.devunity.service.event.EventAdminService;
 @Tag(name = "Event management by admin")
 public class EventAdminController {
     private final EventAdminService eventAdminService;
-
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     @Transactional
 //    @Tag(name = "create event",description = "create event")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -30,6 +31,11 @@ public class EventAdminController {
                 Response.builder().message("Saved event data").data(eventResponse).build()
         );
     }
+
+
+
+
+
 
 
 

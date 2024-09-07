@@ -22,7 +22,8 @@ public class EventCreationDto {
     private String place;
     private MultipartFile eventPhoto;
     private LocalDateTime lastRegisterTime;
-
+    private Integer teamSize;
+    private Integer teamNumber;
     //prize part
     private List<PrizeRequestDto> prizeRequestDtos;
 }

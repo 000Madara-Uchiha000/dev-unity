@@ -12,4 +12,8 @@ public interface ParticipationRepository extends JpaRepository<Participation, UU
 
     @Query(nativeQuery = true,value="select count(*) from participation where event_id=?")
     Integer countBookedSeatsByEventId(UUID id);
+
+    @Query(nativeQuery = true,value = "select count(distinct(team_id)) from participation p where event_id=? and team_id is not null")
+    Integer countBookedTeamPlacesByEventId(UUID eventId);
+    
 }

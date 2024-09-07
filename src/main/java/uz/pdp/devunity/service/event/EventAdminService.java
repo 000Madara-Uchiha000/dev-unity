@@ -74,6 +74,8 @@ public class EventAdminService {
         MultipartFile eventPhoto = eventDto.getEventPhoto();
         byte[] bytes = eventPhoto.getBytes();
         event.setPhoto(new Photo(bytes));
+        event.setTeamNumber(eventDto.getTeamNumber());
+        event.setTeamSize(eventDto.getTeamSize());
         return event;
     }
 

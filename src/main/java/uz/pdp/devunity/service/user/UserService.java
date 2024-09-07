@@ -10,6 +10,7 @@ import uz.pdp.devunity.entity.Photo;
 import uz.pdp.devunity.entity.User;
 import uz.pdp.devunity.repo.PhotoRepository;
 import uz.pdp.devunity.repo.UserRepository;
+import uz.pdp.devunity.security.CustomUserDetailService;
 
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PhotoRepository photoRepository;
+    private final CustomUserDetailService customUserDetailService;
 
     public void editUser(EditUserDto editUserDto) {
         Optional<User> opt = userRepository.findById(editUserDto.getId());
@@ -50,8 +52,12 @@ public class UserService {
     public UserDetails getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-            return (UserDetails) authentication.getPrincipal();
+        if (authentication != null && authentication.isAuthenticated()
+                && authentication.getPrincipal() instanceof String) {
+
+            String username = (String) authentication.getPrincipal();
+
+            return customUserDetailService.loadUserByUsername(username);
         }
 
         return null;

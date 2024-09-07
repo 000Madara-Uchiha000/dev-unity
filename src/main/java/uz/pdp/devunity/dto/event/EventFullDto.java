@@ -23,7 +23,10 @@ public class EventFullDto {
     private String body;
     private LocalDateTime lastRegisterTime;
 
-    private Integer available_seats;
+    private Integer availability;
+
+    private Integer teamNumber;
+    private Integer teamSize;
     private List<PrizeResponseDto> prizeDtos;
     public EventFullDto(Event event) {
         this.id = event.getId();
@@ -34,5 +37,7 @@ public class EventFullDto {
         this.start_time = event.getStartTime();
         this.photo=event.getPhoto().getPhoto();
         this.lastRegisterTime=event.getLastRegisterTime();
+        this.teamSize=event.getTeamSize();
+        this.teamNumber=event.getTeamNumber();
     }
 }

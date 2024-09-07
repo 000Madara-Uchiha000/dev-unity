@@ -21,5 +21,10 @@ public class Participation extends BaseEntity {
     private User user;
 
     @Column(columnDefinition = "boolean default false")
-    private Boolean isAttended;
+    private boolean isAttended;
+
+    @ManyToOne
+    private Team team;
+
+    private boolean isLeader;
 }
