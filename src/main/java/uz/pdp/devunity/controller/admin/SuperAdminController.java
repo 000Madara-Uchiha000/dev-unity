@@ -14,7 +14,7 @@ import uz.pdp.devunity.projection.EventDtoProjection;
 import uz.pdp.devunity.repo.*;
 import uz.pdp.devunity.response.Response;
 import uz.pdp.devunity.response.SuperUserClazzStatResponse;
-import uz.pdp.devunity.response.SuperUserProfileResponse;
+import uz.pdp.devunity.response.UserProfileResponse;
 import uz.pdp.devunity.service.super_admin.SuperAdminService;
 
 import java.util.Arrays;
@@ -41,7 +41,7 @@ public class SuperAdminController {
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
         if (user.getBio()!=null) {
-            var superUserProfileResponse = new SuperUserProfileResponse(
+            var superUserProfileResponse = new UserProfileResponse(
                     user.getBio().getFirstname(),
                     user.getBio().getLastname(),
                     user.getBio().getPhoto().getPhoto());

@@ -15,5 +15,6 @@ public interface ParticipationRepository extends JpaRepository<Participation, UU
 
     @Query(nativeQuery = true,value = "select count(distinct(team_id)) from participation p where event_id=? and team_id is not null")
     Integer countBookedTeamPlacesByEventId(UUID eventId);
-    
+    @Query("SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END FROM Participation p WHERE p.user.id=:userId AND p.event.id=:eventId")
+    boolean checkUserRegistrationByEventAndUserId(UUID userId, UUID eventId);
 }

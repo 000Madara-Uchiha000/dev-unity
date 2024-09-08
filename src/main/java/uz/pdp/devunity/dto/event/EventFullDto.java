@@ -22,9 +22,9 @@ public class EventFullDto {
     private String place;
     private String body;
     private LocalDateTime lastRegisterTime;
-
     private Integer availability;
 
+    private Boolean isRegistered;
     private Integer teamNumber;
     private Integer teamSize;
     private List<PrizeResponseDto> prizeDtos;

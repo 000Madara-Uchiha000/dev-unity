@@ -46,6 +46,16 @@ public class EventUserService {
         eventFullDto.setAvailability(
                 availability
         );
+        UserDetails currentUser = userService.getCurrentUser();
+        if (currentUser == null) {
+            eventFullDto.setIsRegistered(false);
+        } else {
+            String username = currentUser.getUsername();
+            User user = userRepository.findByUsername(username);
+            boolean res = participationRepository.checkUserRegistrationByEventAndUserId(user.getId(), event.getId());
+            eventFullDto.setIsRegistered(res);
+        }
+
 
         List<PrizeResponseDto> prizes = eventPrizeRepository.findAllByEventIdConvertIntoEventResponseDto(id);
         eventFullDto.setPrizeDtos(prizes);
@@ -84,7 +94,9 @@ public class EventUserService {
 
         String username = currentUser.getUsername();
         User user = userRepository.findByUsername(username);
-
+        if (!checkIsntAlreadyRegistered(user, event)) {
+            throw new RuntimeException("User already registered");
+        }
         if (teamRegister != null) {
             saveTeamParticipants(teamRegister, event, user);
         } else {
@@ -94,6 +106,11 @@ public class EventUserService {
             participationRepository.save(participation);
         }
 
+
+    }
+
+    private boolean checkIsntAlreadyRegistered(User user, Event event) {
+        return participationRepository.checkUserRegistrationByEventAndUserId(user.getId(), event.getId());
 
     }
 
@@ -137,6 +154,6 @@ public class EventUserService {
         }
         String username = currentUser.getUsername();
         User user = userRepository.findByUsername(username);
-        return bioRepository.findAllClazzmatesBioByClazzId(user.getBio().getClazz().getId(),user.getId());
+        return bioRepository.findAllClazzmatesBioByClazzId(user.getBio().getClazz().getId(), user.getId());
     }
 }
