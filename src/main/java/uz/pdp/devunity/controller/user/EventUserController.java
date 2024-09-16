@@ -54,7 +54,6 @@ public class EventUserController {
         );
     }
 
-
     //    @Tag(name = "get event full info")
     @GetMapping
     public ResponseEntity<?> getEventById(@RequestParam("id") UUID id) {
@@ -63,6 +62,7 @@ public class EventUserController {
                 Response.builder().message("Event full info").data(event).build()
         );
     }
+
     @GetMapping("/classmates")
     public ResponseEntity<?> getAllClassmates() {
         List<UserShortDto> users=eventUserService.getClassmatesShortDto();

@@ -34,7 +34,6 @@ public class UserController {
 
     @GetMapping("/profile")
     public ResponseEntity<?> getUserBio() {
-
         UserDetails currentUser = userService.getCurrentUser();
         if (currentUser == null) {
             return ResponseEntity.notFound().build();

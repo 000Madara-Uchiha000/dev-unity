@@ -50,14 +50,11 @@ public class Runner implements CommandLineRunner {
             roleRepository.save(roleAdmin);
             roleRepository.save(roleSuperAdmin);
 
-            Clazz clazz=Clazz.builder()
-                    .name("8-02")
-                    .build();
-            clazzRepository.save(clazz);
+            savingClazzes();
 
 
             Clazz clazz1=Clazz.builder()
-                    .name("10-02")
+                    .name("11-02")
                     .build();
             clazzRepository.save(clazz1);
 
@@ -84,7 +81,7 @@ public class Runner implements CommandLineRunner {
                             .firstname("Ja'farbek")
                             .lastname("Sayfiddinov")
                             .clazz(clazz1)
-                            .bio("Everything is ok")
+                            .bio("There must be bio")
                             .photo(Photo.builder()
                                     .photo(bytes)
                                     .build())
@@ -130,5 +127,18 @@ public class Runner implements CommandLineRunner {
             adminRepository.save(admin1);
         }
 
+    }
+
+    private void savingClazzes() {
+        for (int i = 5; i <=11 ; i++) {
+            for (int j = 1; j <=5; j++) {
+                if (!(i==11 && j==2)){
+                    Clazz clazz = Clazz.builder()
+                            .name(i + "-0"+j)
+                            .build();
+                    clazzRepository.save(clazz);
+                }
+            }
+        }
     }
 }

@@ -76,12 +76,14 @@ public class EventUserService {
     }
 
     public void registerForEvent(UUID eventId, TeamEventRegisterRequest teamRegister) {
+
+
+
         Optional<Event> opt = eventRepository.findById(eventId);
         if (opt.isEmpty()) {
             throw new RuntimeException("Event not found");
         }
         Event event = opt.get();
-
 
         UserDetails currentUser = userService.getCurrentUser();
         if (currentUser == null) {
@@ -92,11 +94,17 @@ public class EventUserService {
         }
 
 
+
         String username = currentUser.getUsername();
         User user = userRepository.findByUsername(username);
         if (!checkIsntAlreadyRegistered(user, event)) {
             throw new RuntimeException("User already registered");
         }
+        String clazzAsString = user.getBio().getClazz().getName();
+        if (Integer.parseInt(String.valueOf(clazzAsString.charAt(0)))<8){
+            throw new RuntimeException("At least 8th grade students can participate to this event");
+        }
+
         if (teamRegister != null) {
             saveTeamParticipants(teamRegister, event, user);
         } else {

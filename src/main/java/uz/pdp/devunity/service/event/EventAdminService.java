@@ -31,7 +31,7 @@ public class EventAdminService {
     private final EventPrizeRepository eventPrizeRepository;
 
     @SneakyThrows
-    public EventCreationResponse createEvent(EventCreationDto eventDto) {
+    public EventCreationResponse  createEvent(EventCreationDto eventDto) {
         Event newEvent = eventDtoToEntity(eventDto);
         Event savedEvent = eventRepository.save(newEvent);
         List<EventPrize> eventPrizes = saveAllEventPrizes(eventDto, savedEvent);
