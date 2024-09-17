@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dev Unity Register Form</title>
+    <link rel="stylesheet" href="./style/login-style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <form id="registerForm">
+        <h2>Register</h2>
+        <div class="input-field">
+          <input type="text" id="firstName" name="firstName" required />
+          <label>Enter your first name:</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="lastName" name="lastName" required />
+          <label>Enter your last name:</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="email" name="email" required />
+          <label>Enter your username:</label>
+        </div>
+        <div class="input-field">
+          <select name="class" id="class">
+            <option value="5-01">5-01</option>
+                     
+          </select>
+          <label>Enter your class:</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="password" name="password" required />
+          <label>Enter your password:</label>
+        </div>
+        <div class="input-field">
+          <input
+            type="password"
+            id="repeat-password"
+            name="repeat-password"
+            required
+          />
+          <label>Repeat your password:</label>
+        </div>
+        <div class="forget">
+          <label for="remember">
+            <input type="checkbox" id="remember" />
+            <p>Remember me</p>
+          </label>
+          <a href="#">Forgot password?</a>
+        </div>
+        <button type="submit">Register</button>
+        <div class="login">
+          <p>Already have an account? <a href="login.html">Login</a></p>
+        </div>
+      </form>
+    </div>
+    <script src="./javascript/axios.js"></script>
+    <script src="./javascript/register.js"></script>
+  </body>
+</html>
